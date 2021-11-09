@@ -30,7 +30,7 @@ export default function MyApp(props) {
     
     useEffect(() => {
         setCheckIfWalletIsConnected();
-      }, []);
+      }, [currentAccount]);
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -40,8 +40,8 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Header {...currentAccount} setConnectWallet={setConnectWallet} />
-        <Component {...pageProps} {...currentAccount}/>
+        <Header current={currentAccount} setConnectWallet={setConnectWallet} />
+        <Component {...pageProps} current={currentAccount}/>
       </ThemeProvider>
     </CacheProvider>
   );
