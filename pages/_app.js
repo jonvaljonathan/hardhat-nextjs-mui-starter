@@ -22,14 +22,15 @@ export default function MyApp(props) {
         setCurrentAccount(connectWallet());
     }
 
-    const setCheckIfWalletIsConnected = () => {
-        setCurrentAccount(checkIfWalletIsConnected());
+    const updateCurrentAccount = async () => {
+        const account = await checkIfWalletIsConnected();
+        setCurrentAccount(account);
         console.log('afterCheckIfWalletISConnected');
         console.log({currentAccount});
     }
     
     useEffect(() => {
-        setCheckIfWalletIsConnected();
+        updateCurrentAccount();
       }, []);
   return (
     <CacheProvider value={emotionCache}>
