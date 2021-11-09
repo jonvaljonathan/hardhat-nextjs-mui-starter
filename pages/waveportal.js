@@ -38,8 +38,9 @@ export default function waveportal() {
   };
 
   useEffect(() => {
+    console.log('useEffect update contrat');  
     updateContract();
-  }, [connectedContract]);
+  }, []);
 
   useEffect(() => {
     updateWaves();
@@ -98,7 +99,6 @@ export default function waveportal() {
             <div
               key={index}
               style={{
-                backgroundColor: "OldLace",
                 marginTop: "16px",
                 padding: "8px",
               }}
