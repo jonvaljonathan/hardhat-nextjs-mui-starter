@@ -3,7 +3,7 @@ import { WAVE_PORTAL_CONTRACT_ADDRESS } from "../lib/constants";
 import { connectToContract } from "../lib/connectToContract";
 import WavePortal from "../public/contracts/WavePortal.json";
 import { wave } from "../lib/wavePortal/wave";
-import getAllWaves from "../lib/wavePortal/wave";
+import { getAllWaves } from "../lib/wavePortal/getAllWaves";
 import { checkIfWalletIsConnected } from "../lib/checkIfWalletIsConnected";
 import { useForm } from "react-hook-form";
 
@@ -23,6 +23,7 @@ export default function waveportal() {
       WAVE_PORTAL_CONTRACT_ADDRESS,
       WavePortal.abi
     );
+    console.log(connectedContract);
     setConnectedContract(connectedContract);
   };
   const setCheckIfWalletIsConnected = async () => {
@@ -32,13 +33,13 @@ export default function waveportal() {
 
   const updateWaves = async () => {
     if (currentAccount && connectedContract) {
-      getAllWaves(connectedContract, setAllWaves);
+     getAllWaves(connectedContract, setAllWaves, setCount);
     }
   };
 
   useEffect(() => {
     updateContract();
-  }, []);
+  }, [connectedContract]);
 
   useEffect(() => {
     updateWaves();
@@ -51,17 +52,17 @@ export default function waveportal() {
   }, []);
 
   const onSubmit = async (data) => {
-    console.log(data);
+    const waveResponse = await wave(
+        data,
+        connectedContract,
+        setMining,
+        setCount
+      );
+      await updateWaves();
   };
   /*
   const handleSubmit = async () => {
-    const waveResponse = await wave(
-      message,
-      connectedContract,
-      setMining,
-      setCount
-    );
-    await updateWaves();
+    
   };
   */
   return (
@@ -74,7 +75,7 @@ export default function waveportal() {
           working to be a Web3 Developer. Wierd right? Connect your Ethereum
           wallet and wave at me!
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <label>
             Message:
             <input
