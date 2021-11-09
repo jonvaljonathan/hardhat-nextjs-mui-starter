@@ -9,6 +9,7 @@ export const ConnectButton = (connectProps) => {
     const { setConnectWallet } = connectProps;
     console.log('currentAccount');
     console.log({currentAccount})
+    console.log(currentAccount === "");
     return (
     <div>
         {currentAccount === "" ? (

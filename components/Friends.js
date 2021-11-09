@@ -2,13 +2,10 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import openZeppelin from '../public/assets/openZeppelin.jpg'
 import alchemy from '../public/assets/alchemy.jpg';
-import ethereum from '../public/assets/ethereum.png';
 import ethers from '../public/assets/ethers.jpg';
 import hardhat from '../public/assets/hardhat.jpg';
 import materialui from '../public/assets/materialui.png';
 import nextjs from '../public/assets/nextjs.jpg';
-import node from '../public/assets/node.png';
-import react from '../public/assets/react.png';
 import Link from 'next/link';
 import Image from 'next/dist/client/image';
 import Grid from '@mui/material/Grid';
