@@ -11,7 +11,7 @@ import {stylePaper, styleRaisedButton } from '../SharedStyles';
 /*
  * We pass in our characterNFT metadata so we can a cool card in our UI
  */
-const Arena = ({ characterNFT, currentAccount, gameContract, setCharacterNFT, setIsLoading }) => {
+const Arena = ({ characterNFT, gameContract, setCharacterNFT, setIsLoading }) => {
   console.log('ARENA');
   console.log(characterNFT);
   const [boss, setBoss] = useState(null);

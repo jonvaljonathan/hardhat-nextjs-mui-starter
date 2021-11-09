@@ -4,22 +4,7 @@ import { checkIfWalletIsConnected } from '../lib/checkIfWalletIsConnected';
 import { useState, useEffect } from 'react';
 import { styleConnectButton } from './SharedStyles';
 
-export const ConnectButton = () => {
-
-    const [currentAccount, setCurrentAccount] = useState("");
-
-    const setConnectWallet = () => {
-        setCurrentAccount(connectWallet());
-    }
-
-    const setCheckIfWalletIsConnected = () => {
-        setCurrentAccount(checkIfWalletIsConnected());
-        console.log(currentAccount);
-    }
-    
-    useEffect(() => {
-        setCheckIfWalletIsConnected();
-      }, []);
+export const ConnectButton = (currentAccount, setConnectWallet) => {
     
     return (
     <div>

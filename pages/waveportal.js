@@ -6,6 +6,13 @@ import { wave } from "../lib/wavePortal/wave";
 import { getAllWaves } from "../lib/wavePortal/getAllWaves";
 import { checkIfWalletIsConnected } from "../lib/checkIfWalletIsConnected";
 import { useForm } from "react-hook-form";
+import { Grid, Typography, Link } from "@mui/material";
+import {styleApp, styleTitleText} from "../components/SharedStyles";
+import theme from "../lib/theme";
+import { CircularProgress } from "@mui/material";
+import Footer from "../components/Footer";
+
+
 
 export default function waveportal() {
   const { register, handleSubmit } = useForm();
@@ -14,11 +21,9 @@ export default function waveportal() {
   const [connectedContract, setConnectedContract] = useState(null);
   const [mining, setMining] = useState(false);
   const [allWaves, setAllWaves] = useState([]);
-  const [message, setMessage] = useState();
   const [count, setCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const updateContract = async () => {
+  const updateContract = async (currentAccount) => {
     const connectedContract = await connectToContract(
       WAVE_PORTAL_CONTRACT_ADDRESS,
       WavePortal.abi
@@ -26,90 +31,86 @@ export default function waveportal() {
     console.log(connectedContract);
     setConnectedContract(connectedContract);
   };
-  const setCheckIfWalletIsConnected = async () => {
-    setCurrentAccount(checkIfWalletIsConnected());
-    console.log(currentAccount);
-  };
 
   const updateWaves = async () => {
-    if (currentAccount && connectedContract) {
+    console.log('updateWaves');
+    console.log(currentAccount);  
+    if (connectedContract) {
      getAllWaves(connectedContract, setAllWaves, setCount);
     }
   };
 
   useEffect(() => {
-    console.log('useEffect update contrat');  
     updateContract();
-  }, []);
-
-  useEffect(() => {
     updateWaves();
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
-    setCheckIfWalletIsConnected();
-    setIsLoading(false);
-  }, []);
+    updateWaves();
+  }, [currentAccount, connectedContract]);
+
 
   const onSubmit = async (data) => {
     const waveResponse = await wave(
-        data,
+        data.message,
         connectedContract,
         setMining,
         setCount
       );
       await updateWaves();
   };
-  /*
-  const handleSubmit = async () => {
-    
-  };
-  */
+ 
   return (
-    <div className="mainContainer">
-      <div className="dataContainer">
-        <div className="header">👋 Hey there!</div>
-
-        <div>
-          I am Jon Valjonathan and I run a boutique old folks home and am
-          working to be a Web3 Developer. Wierd right? Connect your Ethereum
-          wallet and wave at me!
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label>
-            Message:
-            <input
-              type="text"
-              {...register("message")}
-              name="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
-          </label>
-          <button className="waveButton" type="submit">
-            Wave at Me
-          </button>
-        </form>
-
-        {mining && <p> mining tx </p>}
-
-        {allWaves.map((wave, index) => {
-          return (
-            <div
-              key={index}
-              style={{
-                marginTop: "16px",
-                padding: "8px",
-              }}
-            >
-              <div>Address: {wave.address}</div>
-              <div>Time: {wave.timestamp.toString()}</div>
-              <div>Message: {wave.message}</div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
+    <div style={styleApp}>
+        <Grid container spacing={2} align="center">
+          <Grid item xs={12} style={{paddingTop:"5%"}}>
+            <Typography variant='h1' style={styleTitleText}>
+              Wave to the contract! 
+            </Typography>
+          </Grid>  
+          {mining === true? (
+            <Grid item xs={12}>
+              <CircularProgress align="center"/>
+            </Grid>
+          ): null}
+          <Grid item xs={12}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label>
+                Message:
+                <input
+                type="text"
+                {...register("message")}
+                />
+            </label>
+            <button className="waveButton" type="submit">
+                Wave at Me
+            </button>
+          </form>
+          </Grid>
+          <Grid item xs={12} style={{paddingTop:"5%"}}>
+            <Typography variant='h1' style={styleTitleText}>
+              {`Total waves: ${count}`} 
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+          {allWaves.map((wave, index) => {
+            return (
+                <div
+                key={index}
+                style={{
+                    marginTop: "16px",
+                    padding: "8px",
+                }}
+                >
+                <div>Address: {wave.address}</div>
+                <div>Time: {wave.timestamp.toString()}</div>
+                <div>Message: {wave.message}</div>
+                </div>
+            );
+            })}
+            </Grid>
+          </Grid>
+          <Footer connectedContract={connectedContract} />
+    </div> 
+    )
 }

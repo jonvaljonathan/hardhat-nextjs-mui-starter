@@ -1,5 +1,4 @@
 import { withTheme } from '@emotion/react';
-import { autocompleteClasses } from '@mui/material';
 import theme from '../lib/theme';
 
 const stylePaper = {
@@ -20,6 +19,8 @@ const styleMenuItem = {
 
 const styleLink = {
   color: 'white',
+  fontSize: '25px',
+
 }
 
 const styleRaisedButton = {
@@ -34,12 +35,13 @@ const styleRaisedButton = {
 };
 
 const styleApp = {
-  height: '100vh',
+  minHeight: '100vh',
   backgroundColor:' #0d1116',
   overflow: 'scroll',
   textAlign: 'center',
   maxWidth: '1200px',
   margin: '0 auto',
+  position: 'relative',
 }
 
 const styleContainer = {
@@ -59,6 +61,13 @@ const styleHeader = {
     fontSize: '50px',
     fontWeight: 'bold',
   }
+
+const styleFooter = {
+  position:'absolute',
+  bottom: 0,
+  width: '100%',
+  backgroundColor: "#3f51b5"
+}
   
   const styleSubText = {
     fontSize: '25px',
@@ -97,4 +106,5 @@ module.exports = {
   styleMenuItem,
   styleLink,
   stylePaper,
+  styleFooter,
 };

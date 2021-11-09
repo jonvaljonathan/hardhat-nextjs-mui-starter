@@ -3,35 +3,40 @@ import {styleTitleText, styleRaisedButton, styleApp} from '../components/SharedS
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 import theme from '../lib/theme';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import CircularProgress from '@mui/material/CircularProgress';
 import { checkIfWalletIsConnected } from '../lib/checkIfWalletIsConnected';
 import { askContractToMintNft } from '../lib/mintNFT/askContractToMintNft';
 import { NFTzRemaining } from '../lib/mintNFT/NFTzRemaining';
 import { Typography } from "@mui/material";
 import Grid from '@mui/material/Grid';
+import Footer from "../components/Footer";
+import { MINT_NFT_CONTRACT_ADDRESS } from "../lib/constants";
+import { connectToContract } from "../lib/connectToContract";
+import myEpicNft from '../public/contracts/MyEpicNFT.json';
 
 // Constants
-const TWITTER_HANDLE = 'jonValjonathan';
-const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 const OPENSEA_LINK = 'https://testnets.opensea.io/collection/squarenft-oecgawyrom';
 const TOTAL_MINT_COUNT = 50;
 
-const mintNFT = () => {
+const mintNFT = (currentAccount) => {
 
   const [NFTzMinted, setNFTzMinted] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentAccount, setCurrentAccount] = useState("");
+  const [connectedContract, setConnectedContract] = useState(null);
 
+  const updateContract = async () => {
+    const connectedContract = await connectToContract(
+      MINT_NFT_CONTRACT_ADDRESS,
+      myEpicNft.abi
+    );
+    console.log(connectedContract);
+    setConnectedContract(connectedContract);
+  };
 
-  const setCheckIfWalletIsConnected = () => {
-        setCurrentAccount(checkIfWalletIsConnected());
-        console.log(currentAccount);
-  }
   
   const mintNFT = async () => {
     setIsLoading(true);
-    await askContractToMintNft();
+    await askContractToMintNft(connectedContract);
     await setNFTzRemaining();
     setIsLoading(false);
   }
@@ -40,13 +45,14 @@ const mintNFT = () => {
     setNFTzMinted(await NFTzRemaining());
   }
 
-    useEffect(() => {
-      setNFTzRemaining();
-    }, []);
+  useEffect(() => {
+    updateContract();
+    setNFTzRemaining();
+  }, []);
 
     useEffect(() => {
-      setCheckIfWalletIsConnected();
-  }, []);
+      setNFTzRemaining();
+    }, [currentAccount, connectedContract]);
 
   return (
       <div style={styleApp}>
@@ -60,9 +66,9 @@ const mintNFT = () => {
             </Typography>
           </Grid>
           {isLoading === true? (
-            <div>
+            <Grid item xs={12} style={{paddingTop:"5%"}}>
               <CircularProgress align="center"/>
-            </div>
+            </Grid>
           ): null}
           <Grid item xs={12}>
             <p>{NFTzMinted} / 50 NFTz Minted</p>
@@ -77,14 +83,8 @@ const mintNFT = () => {
               href={OPENSEA_LINK}>
                 View Collection on Opensea
               </Link>
-          <div>
-            <TwitterIcon />
-            <Link color={theme.palette.text.primary}
-              href={TWITTER_LINK}            
-            >
-              {`built by @${TWITTER_HANDLE}`}
-            </Link>
-          </div>
+              <Footer connectedContract={connectedContract} />
+
     </div> 
     )
   };
