@@ -24,7 +24,8 @@ export default function MyApp(props) {
 
     const setCheckIfWalletIsConnected = () => {
         setCurrentAccount(checkIfWalletIsConnected());
-        console.log(currentAccount);
+        console.log('afterCheckIfWalletISConnected');
+        console.log({currentAccount});
     }
     
     useEffect(() => {
