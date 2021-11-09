@@ -8,6 +8,8 @@ import Grid from '@mui/material/Grid';
 import {styleHeaderContainer} from './SharedStyles';
 
 export default function ButtonAppBar(currentAccount, setConnectWallet) {
+  const { currentAccount } = currentAccount;
+  const { setConnectWallet } = setConnectWallet;
   return (
     <Box sx={{ flexGrow: 1 }} >
       <AppBar position="static">
