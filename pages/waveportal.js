@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { WAVE_PORTAL_CONTRACT_ADDRESS } from "../lib/constants";
 import { connectToContract } from "../lib/connectToContract";
-import WavePortal from "../artifacts/contracts/WavePortal.sol/WavePortal.json";
+import WavePortal from "../public/contracts/WavePortal.json";
 import wave from "../lib/wavePortal/wave";
 import getAllWaves from "../lib/wavePortal/wave";
 import { checkIfWalletIsConnected } from "../lib/checkIfWalletIsConnected";

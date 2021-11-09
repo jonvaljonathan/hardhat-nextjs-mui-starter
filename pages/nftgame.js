@@ -9,7 +9,7 @@ import { ConnectButton } from '../components/ConnectButton';
 import SelectCharacter from '../components/nftGame/SelectCharacter';
 import { connectToContract } from "../lib/connectToContract";
 import { NFT_GAME_CONTRACT_ADDRESS } from "../lib/constants";
-import myEpicGame from '../artifacts/contracts/MyEpicGame.sol/MyEpicGame.json';
+import myEpicGame from '../public/contracts/MyEpicGame.json';
 import Arena from "../components/nftGame/Arena";
 import { checkIfUserHasNFT } from '../lib/nftGame/checkIfUserHasNFT';
 
