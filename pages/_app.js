@@ -7,9 +7,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import theme from '../lib/theme';
 import createEmotionCache from '../public/createEmotionCache';
-import Header from '../components/Header.js';
-import Footer from '../components/Footer';
+import { Header } from '../components/Header.js';
 import { checkIfWalletIsConnected } from '../lib/checkIfWalletIsConnected';
+import { connectWallet } from '../lib/connect';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -32,6 +32,8 @@ export default function MyApp(props) {
     useEffect(() => {
         updateCurrentAccount();
       }, []);
+    
+    const connectProps = {currentAccount, setConnectWallet};
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -41,8 +43,8 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Header currentAcctount={currentAccount} setConnectWallet={setConnectWallet} />
-        <Component {...pageProps} current={currentAccount}/>
+        <Header {...connectProps}/>
+        <Component {...pageProps}/>
       </ThemeProvider>
     </CacheProvider>
   );

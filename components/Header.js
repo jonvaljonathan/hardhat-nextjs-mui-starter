@@ -7,9 +7,9 @@ import HeaderMenu from './HeaderMenu';
 import Grid from '@mui/material/Grid';
 import {styleHeaderContainer} from './SharedStyles';
 
-export default function ButtonAppBar(currentAccount, setConnectWallet) {
-  const { currentAccount } = currentAccount;
-  const { setConnectWallet } = setConnectWallet;
+export function Header(connectProps) {
+  console.log('Header');
+  console.log(connectProps);
   return (
     <Box sx={{ flexGrow: 1 }} >
       <AppBar position="static">
@@ -22,7 +22,7 @@ export default function ButtonAppBar(currentAccount, setConnectWallet) {
                 </Grid>
                 
                 <Grid item xs={3} style={{paddingLeft:"10%"}}> 
-                    <ConnectButton currentAccount={currentAccount} setConnectWallet={setConnectWallet}/>
+                  <ConnectButton {...connectProps}/>
                 </Grid>
             </Grid>
         </Toolbar>
