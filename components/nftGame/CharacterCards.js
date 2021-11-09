@@ -6,9 +6,10 @@ import { Typography } from '@mui/material';
 import {stylePaper } from '../SharedStyles';
 import { mintCharacterNFTAction } from '../../lib/nftGame/mintCharacterNFTAction';
 
-export const CharacterCards = ({characters, gameContract, setIsLoading }) => {
+export const CharacterCards = (characterCardProps) => {
+    const {characters, setIsLoading, gameContract} = characterCardProps;
     console.log(characters);
-    
+
     if (characters){
         return (
                 <Grid container spacing={2} align="center">
@@ -22,7 +23,7 @@ export const CharacterCards = ({characters, gameContract, setIsLoading }) => {
                                     {character.name}
                                 </Typography>
                                 <Image width={"350px"} height={"350px"} src={character.imageURI} alt={`${character.name} logo`}/>
-                                <Button onClick={() => mintCharacterNFTAction(index, gameContract, setIsloading)}>
+                                <Button onClick={() => mintCharacterNFTAction(index, gameContract, setIsLoading)}>
                                     {`Mint ${character.name}`}
                                 </Button>
                             </Paper>

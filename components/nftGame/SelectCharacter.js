@@ -24,7 +24,7 @@ const SelectCharacter = ({ setCharacterNFT, gameContract, setIsLoading }) => {
     };
 
     
-    
+    const characterCardProps = { characters, gameContract, setIsLoading};
 
     useEffect(() => {
         if (gameContract) {
@@ -47,7 +47,7 @@ const SelectCharacter = ({ setCharacterNFT, gameContract, setIsLoading }) => {
       
 
     return (
-         <CharacterCards characters={characters} gameContract={gameContract} />
+         <CharacterCards {...characterCardProps} />
     )
   };
 

@@ -14,7 +14,7 @@ import Footer from "../components/Footer";
 
 
 // Constants
-const OPENSEA_LINK = 'https://testnets.opensea.io/collection/squarenft-oecgawyrom';
+const OPENSEA_LINK = 'https://testnets.opensea.io/collection/heroes-ffgteisgjg';
 
 const nftgame = () => {
 

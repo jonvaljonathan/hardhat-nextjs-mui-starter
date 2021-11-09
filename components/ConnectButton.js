@@ -3,13 +3,10 @@ import { styleConnectButton } from './SharedStyles';
 import { checkIfWalletIsConnected } from '../lib/checkIfWalletIsConnected';
 
 export const ConnectButton = (connectProps) => {
-    console.log('connect button');
-    console.log(connectProps);
+    
     const { currentAccount } = connectProps;
     const { setConnectWallet } = connectProps;
-    console.log('currentAccount');
-    console.log({currentAccount})
-    console.log(currentAccount === "");
+    
     return (
     <div>
         {currentAccount === "" ? (

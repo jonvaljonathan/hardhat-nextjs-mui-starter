@@ -15,7 +15,7 @@ import { connectToContract } from "../lib/connectToContract";
 import myEpicNft from '../public/contracts/MyEpicNFT.json';
 
 // Constants
-const OPENSEA_LINK = 'https://testnets.opensea.io/collection/squarenft-oecgawyrom';
+const OPENSEA_LINK = 'https://testnets.opensea.io/collection/squarenft-6jh3gynj0m';
 const TOTAL_MINT_COUNT = 50;
 
 const mintNFT = (currentAccount) => {
