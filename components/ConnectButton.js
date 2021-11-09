@@ -7,7 +7,7 @@ export const ConnectButton = (connectProps) => {
     console.log(connectProps);
     const { currentAccount } = connectProps;
     const { setConnectWallet } = connectProps;
-    console.log('connectButton');
+    console.log('currentAccount');
     console.log({currentAccount})
     return (
     <div>

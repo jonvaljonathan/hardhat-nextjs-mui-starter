@@ -14,10 +14,10 @@ import Footer from "../components/Footer";
 
 
 
-export default function waveportal() {
+export default function waveportal(connectProps) {
   const { register, handleSubmit } = useForm();
+  const { currentAccount } = connectProps;
 
-  const [currentAccount, setCurrentAccount] = useState("");
   const [connectedContract, setConnectedContract] = useState(null);
   const [mining, setMining] = useState(false);
   const [allWaves, setAllWaves] = useState([]);
@@ -47,7 +47,7 @@ export default function waveportal() {
 
   useEffect(() => {
     updateWaves();
-  }, [currentAccount, connectedContract]);
+  }, [connectedContract]);
 
 
   const onSubmit = async (data) => {
