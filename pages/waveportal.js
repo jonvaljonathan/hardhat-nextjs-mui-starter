@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { WAVE_PORTAL_CONTRACT_ADDRESS } from "../lib/constants";
 import { connectToContract } from "../lib/connectToContract";
 import WavePortal from "../public/contracts/WavePortal.json";
-import wave from "../lib/wavePortal/wave";
+import { wave } from "../lib/wavePortal/wave";
 import getAllWaves from "../lib/wavePortal/wave";
 import { checkIfWalletIsConnected } from "../lib/checkIfWalletIsConnected";
+import { useForm } from "react-hook-form";
 
 export default function waveportal() {
+  const { register, handleSubmit } = useForm();
+
   const [currentAccount, setCurrentAccount] = useState("");
   const [connectedContract, setConnectedContract] = useState(null);
   const [mining, setMining] = useState(false);
@@ -14,7 +17,6 @@ export default function waveportal() {
   const [message, setMessage] = useState();
   const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-
 
   const updateContract = async () => {
     const connectedContract = await connectToContract(
@@ -29,17 +31,17 @@ export default function waveportal() {
   };
 
   const updateWaves = async () => {
-      if (currentAccount && connectedContract) {
+    if (currentAccount && connectedContract) {
       getAllWaves(connectedContract, setAllWaves);
     }
-  }
+  };
 
   useEffect(() => {
     updateContract();
   }, []);
 
   useEffect(() => {
-      updateWaves()
+    updateWaves();
   }, []);
 
   useEffect(() => {
@@ -48,11 +50,20 @@ export default function waveportal() {
     setIsLoading(false);
   }, []);
 
+  const onSubmit = async (data) => {
+    console.log(data);
+  };
+  /*
   const handleSubmit = async () => {
-    const waveResponse = await wave(message, connectedContract, setMining, setCount);
+    const waveResponse = await wave(
+      message,
+      connectedContract,
+      setMining,
+      setCount
+    );
     await updateWaves();
   };
-
+  */
   return (
     <div className="mainContainer">
       <div className="dataContainer">
@@ -68,6 +79,7 @@ export default function waveportal() {
             Message:
             <input
               type="text"
+              {...register("message")}
               name="message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
