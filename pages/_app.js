@@ -40,8 +40,8 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Header currentAccount={currentAccount} setConnectWallet={setConnectWallet} />
-        <Component {...pageProps} currentAccount={currentAccount}/>
+        <Header {...currentAccount} setConnectWallet={setConnectWallet} />
+        <Component {...pageProps} {...currentAccount}/>
       </ThemeProvider>
     </CacheProvider>
   );

@@ -20,7 +20,7 @@ export default function ButtonAppBar(currentAccount, setConnectWallet) {
                 </Grid>
                 
                 <Grid item xs={3} style={{paddingLeft:"10%"}}> 
-                    <ConnectButton currentAccount={currentAccount} setConnectWallet={setConnectWallet}/>
+                    <ConnectButton {...currentAccount} setConnectWallet={setConnectWallet}/>
                 </Grid>
             </Grid>
         </Toolbar>

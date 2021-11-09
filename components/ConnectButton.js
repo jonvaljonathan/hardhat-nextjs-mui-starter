@@ -2,7 +2,8 @@ import Button from '@material-ui/core/Button';
 import { styleConnectButton } from './SharedStyles';
 
 export const ConnectButton = (currentAccount, setConnectWallet) => {
-    console.log({currentAccount});
+    console.log('connect button');
+    console.log(currentAccount);
     return (
     <div>
         {currentAccount === "" ? (
