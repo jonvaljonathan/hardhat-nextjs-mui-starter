@@ -5,6 +5,8 @@ import { checkIfWalletIsConnected } from '../lib/checkIfWalletIsConnected';
 export const ConnectButton = (currentAccount, setConnectWallet) => {
     console.log('connect button');
     console.log(currentAccount);
+    const isWalletConnected = checkIfWalletIsConnected();
+    console.log({isWalletConnected});
     return (
     <div>
         {currentAccount === "" ? (

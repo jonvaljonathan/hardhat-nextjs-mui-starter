@@ -30,7 +30,7 @@ export default function MyApp(props) {
     
     useEffect(() => {
         setCheckIfWalletIsConnected();
-      }, [currentAccount]);
+      }, []);
   return (
     <CacheProvider value={emotionCache}>
       <Head>
