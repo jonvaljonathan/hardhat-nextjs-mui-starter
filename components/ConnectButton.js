@@ -7,7 +7,7 @@ export const ConnectButton = (currentAccount, setConnectWallet) => {
     const { setConnectWallet } = setConnectWallet;
     console.log('connect button');
     console.log(currentAccount);
-    const isWalletConnected = checkIfWalletIsConnected();
+    const isWalletConnected = await checkIfWalletIsConnected();
     console.log({isWalletConnected});
     return (
     <div>
