@@ -12,6 +12,11 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 12,
+    sourceType: module,
+    ecmaFeatures: true,
+  },
+  rules: {
+    'import/no-named-as-default': 'off',
   },
   overrides: [
     {
