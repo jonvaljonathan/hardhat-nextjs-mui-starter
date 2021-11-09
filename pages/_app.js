@@ -26,7 +26,7 @@ export default function MyApp(props) {
         const account = await checkIfWalletIsConnected();
         setCurrentAccount(account);
         console.log('afterCheckIfWalletISConnected');
-        console.log({currentAccount});
+        console.log(currentAccount);
     }
     
     useEffect(() => {

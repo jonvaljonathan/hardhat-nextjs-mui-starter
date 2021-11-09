@@ -2,7 +2,7 @@ import Button from '@material-ui/core/Button';
 import { styleConnectButton } from './SharedStyles';
 import { checkIfWalletIsConnected } from '../lib/checkIfWalletIsConnected';
 
-export const ConnectButton = (currentAccount, setConnectWallet) => {
+export const ConnectButton = async (currentAccount, setConnectWallet) => {
     const { currentAccount } = currentAccount;
     const { setConnectWallet } = setConnectWallet;
     console.log('connect button');
