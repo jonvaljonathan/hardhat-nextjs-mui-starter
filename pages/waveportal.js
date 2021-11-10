@@ -23,7 +23,7 @@ export default function waveportal(connectProps) {
   const [allWaves, setAllWaves] = useState([]);
   const [count, setCount] = useState(0);
 
-  const updateContract = async (currentAccount) => {
+  const updateContract = async () => {
     const connectedContract = await connectToContract(
       WAVE_PORTAL_CONTRACT_ADDRESS,
       WavePortal.abi
@@ -34,7 +34,6 @@ export default function waveportal(connectProps) {
 
   const updateWaves = async () => {
     console.log('updateWaves');
-    console.log(currentAccount);  
     if (connectedContract) {
      getAllWaves(connectedContract, setAllWaves, setCount);
     }

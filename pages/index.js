@@ -27,7 +27,7 @@ const index = () => {
             <Grid item xs={12}>
               <h1 style={styleTitleText}>Buildspace.co Knowledge Session</h1>
               <p style={styleSubText}>
-                Three follow along. Text based projects.
+                Three follow-along, text-based projects.
                 <br/> 
                 <br/>
                 Write, compile, and deploy your first smart contracts.

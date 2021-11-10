@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import { Button, Paper } from '@mui/material';
 import { Typography } from '@mui/material';
 import {stylePaper, styleRaisedButton } from '../SharedStyles';
+import { transformBoss } from '../../lib/transformBoss';
 
 /*
  * We pass in our characterNFT metadata so we can a cool card in our UI
@@ -20,7 +21,9 @@ const Arena = ({ characterNFT, gameContract, setCharacterNFT, setIsLoading }) =>
   const fetchBoss = async () => {
       const bossTxn = await gameContract.getBigBoss();
       console.log('Boss:', bossTxn);
-      setBoss(transformCharacterData(bossTxn));
+      setBoss(transformBoss(bossTxn));
+      console.log('transformedBoss');
+      console.log(boss);
   }  
 
   const runAttackAction = async () => {
@@ -42,11 +45,12 @@ const Arena = ({ characterNFT, gameContract, setCharacterNFT, setIsLoading }) =>
     }
   }
 
-  const callOnAttackComplete = (newBossHp, newPlayerHp) => {
-    const bossHp = newBossHp.toNumber();
-    const playerHp = newPlayerHp.toNumber();
+  const callOnAttackComplete = () => {
+    
+    const bossHp = bossHp - characterNFT.attackDamage;
+    const playerHp = characterNFT.hp - boss.attackDamage;
 
-    console.log(`AttackComplete: Boss Hp: ${bossHp} Player Hp: ${playerHp}`);
+    console.log(`AttackComplete: Boss Hp: ${bossHp}`);
 
     /*
     * Update both player and boss Hp
@@ -75,6 +79,12 @@ const Arena = ({ characterNFT, gameContract, setCharacterNFT, setIsLoading }) =>
                             <Paper style={stylePaper}>
                                 <Typography variant='h4'>
                                     {boss.name}
+                                </Typography>
+                                <Typography>
+                                   { `HP: ${boss.hp} / ${boss.maxHp}`}
+                                </Typography>
+                                <Typography>
+                                    {`Attack Damage: ${boss.attackDamage}`}
                                 </Typography>
                                 <Image width={"350px"} height={"350px"} src={boss.imageURI} alt={`${boss.name} logo`}/>
                                 <Button onClick={runAttackAction} style={styleRaisedButton}>

@@ -79,10 +79,10 @@ const mintNFT = (currentAccount) => {
   
           </Grid>
           <br/>
-            <Link color={theme.palette.text.primary}
+            <a color={theme.palette.text.primary} target="_blank" 
               href={OPENSEA_LINK}>
                 View Collection on Opensea
-              </Link>
+              </a>
               <Footer connectedContract={connectedContract} />
 
     </div> 
