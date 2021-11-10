@@ -6,7 +6,6 @@ import ethers from '../public/assets/ethers.jpg';
 import hardhat from '../public/assets/hardhat.jpg';
 import materialui from '../public/assets/materialui.png';
 import nextjs from '../public/assets/nextjs.jpg';
-import Link from 'next/link';
 import Image from 'next/dist/client/image';
 import Grid from '@mui/material/Grid';
 import { Button, Paper } from '@mui/material';
@@ -72,9 +71,9 @@ export default function FriendsCards() {
             <Typography variant='body1'>
                 {friend.subheader}
             </Typography>
-            <Link href={friend.url}>
+            <a href={friend.url}>
                 <Image src={friend.img} alt={`${friend.title} logo`}/>
-            </Link>
+            </a>
             </Paper>
     </Grid>
     ))}

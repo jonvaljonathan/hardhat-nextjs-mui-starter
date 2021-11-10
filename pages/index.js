@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 import {styleTitleText, styleSubText, styleApp, styleLink, styleHeader, styleContainer} from '../components/SharedStyles';
 import Link from '@mui/material/Link';
-import theme from '../lib/theme';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import Grid from '@mui/material/Grid';
 import FriendsCards from "../components/Friends";
-import Footer from "../components/Footer";
 
 
 
 
 // Constants
 const TWITTER_HANDLE = 'jonValjonathan';
-const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 const RINKEBY_FACUET = 'https://buildspace-faucet.vercel.app/';
 const RINKEBY_FACUET2 = 'https://faucet.rinkeby.io/';
 
 const index = () => {
-
-  const [isLoading, setIsLoading] = useState(false);
-
   
   return (
     <div style={styleApp}>

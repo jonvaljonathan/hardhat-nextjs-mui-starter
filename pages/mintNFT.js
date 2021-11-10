@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {styleTitleText, styleRaisedButton, styleApp} from '../components/SharedStyles';
-import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 import theme from '../lib/theme';
 import CircularProgress from '@mui/material/CircularProgress';
-import { checkIfWalletIsConnected } from '../lib/checkIfWalletIsConnected';
 import { askContractToMintNft } from '../lib/mintNFT/askContractToMintNft';
 import { NFTzRemaining } from '../lib/mintNFT/NFTzRemaining';
 import { Typography } from "@mui/material";
@@ -16,7 +14,6 @@ import myEpicNft from '../public/contracts/MyEpicNFT.json';
 
 // Constants
 const OPENSEA_LINK = 'https://testnets.opensea.io/collection/squarenft-6jh3gynj0m';
-const TOTAL_MINT_COUNT = 50;
 
 const mintNFT = (currentAccount) => {
 
