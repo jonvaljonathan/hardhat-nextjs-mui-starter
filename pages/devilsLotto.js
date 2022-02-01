@@ -6,12 +6,13 @@ import { wave } from "../lib/wavePortal/wave";
 import { getAllWaves } from "../lib/wavePortal/getAllWaves";
 import { checkIfWalletIsConnected } from "../lib/checkIfWalletIsConnected";
 import { useForm } from "react-hook-form";
-import { Grid, Typography, Link } from "@mui/material";
+import { Grid, Typography, Link, Button } from "@mui/material";
 import {styleApp, styleTitleText} from "../components/SharedStyles";
 import theme from "../lib/theme";
 import { CircularProgress } from "@mui/material";
 import Footer from "../components/Footer";
 import DevilTrainLottery from "../public/contracts/DevilTrainLottery.json";
+import { buyTicket } from "../lib/devilsLotto/buyTicket";
 
 
 
@@ -21,9 +22,10 @@ export default function waveportal(connectProps) {
 
   const [connectedContract, setConnectedContract] = useState(null);
   const [mining, setMining] = useState(false);
-  const [allWaves, setAllWaves] = useState([]);
-  const [count, setCount] = useState(0);
-
+  const [ticketPrice, setTicketPrice] = useState();
+  const [tripsTaken, setTripsTake] = useState(0);
+  const [ticketSales, setTicketSales] = useState(0);
+ 
   const updateContract = async () => {
     const connectedContract = await connectToContract(
       DEVIL_TRAIN_LOTTO_ADDRESS,
@@ -33,33 +35,20 @@ export default function waveportal(connectProps) {
     setConnectedContract(connectedContract);
   };
 
-  const updateWaves = async () => {
-    console.log('updateWaves');
+  const callBuyTicket = async () => {
+    console.log('buyTicket');
     if (connectedContract) {
-     getAllWaves(connectedContract, setAllWaves, setCount);
+     await buyTicket(connectedContract, setMining, setTicketSales, currentAccount);
     }
   };
-
+ 
   useEffect(() => {
     updateContract();
-    updateWaves();
   }, []);
 
   useEffect(() => {
-    updateWaves();
   }, [connectedContract]);
 
-
-  const onSubmit = async (data) => {
-    const waveResponse = await wave(
-        data.message,
-        connectedContract,
-        setMining,
-        setCount
-      );
-      await updateWaves();
-  };
- 
   return (
     <div style={styleApp}>
         <link href="./resources/css/index.css" type="text/css" rel="stylesheet" />
@@ -80,7 +69,7 @@ export default function waveportal(connectProps) {
         </p>
         <div class="container">
             <div class="center">
-                <button class="button" type="button">Take a Chance</button>
+                <Button class="button" type="button" onClick={callBuyTicket}>Take a Chance</Button>
             </div>
           </div>
         
