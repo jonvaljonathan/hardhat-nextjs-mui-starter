@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { WAVE_PORTAL_CONTRACT_ADDRESS } from "../lib/constants";
+import { DEVIL_TRAIN_LOTTO_ADDRESS } from "../lib/constants";
 import { connectToContract } from "../lib/connectToContract";
 import WavePortal from "../public/contracts/WavePortal.json";
 import { wave } from "../lib/wavePortal/wave";
@@ -11,6 +11,7 @@ import {styleApp, styleTitleText} from "../components/SharedStyles";
 import theme from "../lib/theme";
 import { CircularProgress } from "@mui/material";
 import Footer from "../components/Footer";
+import DevilTrainLottery from "../public/contracts/DevilTrainLottery.json";
 
 
 
@@ -25,8 +26,8 @@ export default function waveportal(connectProps) {
 
   const updateContract = async () => {
     const connectedContract = await connectToContract(
-      WAVE_PORTAL_CONTRACT_ADDRESS,
-      WavePortal.abi
+      DEVIL_TRAIN_LOTTO_ADDRESS,
+      DevilTrainLottery.abi
     );
     console.log(connectedContract);
     setConnectedContract(connectedContract);
