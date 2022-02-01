@@ -11,7 +11,7 @@ const main = async () => {
   
     await dTLContract.deployed();
   
-    console.log('DTL address: ', waveContract.address);
+    console.log('DTL address: ', dTLContract.address);
   };
   
   const runMain = async () => {
