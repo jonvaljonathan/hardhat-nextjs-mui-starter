@@ -8,7 +8,7 @@ import materialui from '../public/assets/materialui.png';
 import nextjs from '../public/assets/nextjs.jpg';
 import Image from 'next/dist/client/image';
 import Grid from '@mui/material/Grid';
-import { Button, Paper } from '@mui/material';
+import { Paper } from '@mui/material';
 import {stylePaper, styleContainer} from './SharedStyles';
 
 const friends = [
@@ -49,14 +49,10 @@ const friends = [
         img: nextjs,
         url:'https://nextjs.org/',
 
-    },
-   
+    },   
 ]
 
-
 export default function FriendsCards() {
-
-
 
   return (
     <div style={styleContainer}>

@@ -17,6 +17,8 @@ const clientSideEmotionCache = createEmotionCache();
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [currentAccount, setCurrentAccount] = useState("");
+    console.log("_app")
+    console.log(currentAccount);
 
     const setConnectWallet = () => {
         setCurrentAccount(connectWallet());
